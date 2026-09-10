@@ -1,0 +1,20 @@
+{
+  "name": "PIVAS Drug Card Generation Schema",
+  "version": "1.0",
+  "rules": {
+    "requireEvidence": true,
+    "externalEvidenceRole": "supplemental",
+    "blockPublishWithoutReview": true
+  },
+  "fields": {
+    "drugName": {"required": true},
+    "brandName": {"required": false},
+    "strength": {"required": true},
+    "preparation": {"required": true, "evidenceRequired": true},
+    "diluent": {"required": true, "evidenceRequired": true},
+    "storage": {"required": true, "evidenceRequired": true},
+    "infusion": {"required": false, "evidenceRequired": true},
+    "warnings": {"required": true, "evidenceRequired": true}
+  },
+  "output": "one_page_pivas_card"
+}
