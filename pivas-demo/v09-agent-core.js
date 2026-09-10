@@ -1,7 +1,6 @@
-/* PIVAS v0.9 Agent core contract tests target these pure functions. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PivasAgentCore=api})(this,function(){
-  function normalizeEvidenceItem(x){ throw new Error('NOT_IMPLEMENTED'); }
-  function validateAgentDraft(draft){ throw new Error('NOT_IMPLEMENTED'); }
-  function nextAgentStep(state){ throw new Error('NOT_IMPLEMENTED'); }
+  function normalizeEvidenceItem(x={}){const external=x.sourceType==='external'||x.role==='supplemental';return {...x,role:external?'supplemental':'primary',publishableAlone:!external};}
+  function validateAgentDraft(draft={}){const blockers=[];for(const [key,f0] of Object.entries(draft.fields||{})){const f=f0||{},text=String(f.text||'').trim(),ev=(f.evidence||[]).map(normalizeEvidenceItem);if(text&&!ev.some(e=>e.role==='primary'&&String(e.quote||e.snippet||'').trim()))blockers.push(`${key} 缺少上传资料/院内资料的主证据`);if(f.conflict)blockers.push(`${key} 存在来源冲突，需药师裁决`);}return {canPublish:blockers.length===0,blockers};}
+  function nextAgentStep(s={}){if(!s.parsed)return 'PARSE_SOURCE';if(!s.extracted)return 'EXTRACT_FIELDS';if((s.missingFields||[]).length&&!s.supplementSearched)return 'SEARCH_SUPPLEMENT';if((s.conflicts||[]).length)return 'RESOLVE_CONFLICT';if(!s.validated)return 'VALIDATE_DRAFT';return 'PHARMACIST_REVIEW';}
   return {normalizeEvidenceItem,validateAgentDraft,nextAgentStep};
 });
