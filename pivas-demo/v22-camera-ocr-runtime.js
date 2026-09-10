@@ -1,30 +1,65 @@
-// PIVAS v22 Camera + OCR Runtime
+// PIVAS v2.2 Camera Manager
+// Front and back cameras are both supported as scan modes.
 (function(){
- const Runtime={
+ const CameraManager={
   stream:null,
-  facingMode:'environment',
   video:null,
-  async start(video,mode){
+  mode:'scan',
+  facingMode:localStorage.getItem('pivas-camera')||'environment',
+
+  async start(video,options={}){
    this.video=video;
-   this.facingMode=mode||this.facingMode;
+   this.mode=options.mode||'scan';
+   if(options.camera){this.facingMode=options.camera;}
    if(this.stream)this.stop();
-   this.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:this.facingMode}},audio:false});
+
+   this.stream=await navigator.mediaDevices.getUserMedia({
+    video:{
+     facingMode:{ideal:this.facingMode},
+     width:{ideal:1280},
+     height:{ideal:720}
+    },
+    audio:false
+   });
+
    video.srcObject=this.stream;
    await video.play();
-   return {ok:true,facing:this.facingMode};
+   localStorage.setItem('pivas-camera',this.facingMode);
+
+   return {
+    ok:true,
+    mode:this.mode,
+    camera:this.facingMode
+   };
   },
+
   async switchCamera(){
    this.facingMode=this.facingMode==='environment'?'user':'environment';
-   if(this.video)return this.start(this.video,this.facingMode);
+   localStorage.setItem('pivas-camera',this.facingMode);
+   if(this.video){
+    return this.start(this.video,{mode:'scan',camera:this.facingMode});
+   }
   },
+
+  getCurrentCamera(){
+   return this.facingMode==='user'?'前置摄像头':'后置摄像头';
+  },
+
   stop(){
-   if(this.stream)this.stream.getTracks().forEach(t=>t.stop());
+   if(this.stream){
+    this.stream.getTracks().forEach(t=>t.stop());
+   }
    this.stream=null;
   },
+
   async recognize(){
-   // OCR adapter reserved. Future: Tesseract/API/local OCR.
-   return {text:'',status:'waiting-ocr'};
+   return {
+    text:'',
+    status:'waiting-ocr',
+    mode:this.mode
+   };
   }
  };
- window.PIVASCameraOCR=Runtime;
+ window.PIVASCameraManager=CameraManager;
+ window.PIVASCameraOCR=CameraManager;
 })();
