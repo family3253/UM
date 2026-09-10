@@ -1,0 +1,6 @@
+const test=require('node:test');const assert=require('node:assert/strict');const core=require('./v09-agent-core.js');
+test('external evidence remains supplemental',()=>{const x=core.normalizeEvidenceItem({sourceType:'external',url:'https://example.org',quote:'filter 0.22um'});assert.equal(x.role,'supplemental');assert.equal(x.publishableAlone,false)});
+test('draft cannot publish when a nonempty clinical field lacks primary evidence',()=>{const r=core.validateAgentDraft({fields:{prep:{text:'0.9% NaCl',evidence:[]},storage:{text:'',evidence:[]}}});assert.equal(r.canPublish,false);assert.ok(r.blockers.some(x=>x.includes('prep')))});
+test('conflict forces pharmacist review',()=>{const r=core.validateAgentDraft({fields:{prep:{text:'A',evidence:[{role:'primary',quote:'A'}],conflict:true}}});assert.equal(r.canPublish,false);assert.ok(r.blockers.some(x=>x.includes('冲突')))});
+test('agent routes missing uploaded evidence to supplemental search',()=>{assert.equal(core.nextAgentStep({parsed:true,extracted:true,missingFields:['infusion'],supplementSearched:false}),'SEARCH_SUPPLEMENT')});
+test('agent routes complete draft to pharmacist review',()=>{assert.equal(core.nextAgentStep({parsed:true,extracted:true,missingFields:[],conflicts:[],validated:true}),'PHARMACIST_REVIEW')});
