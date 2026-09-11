@@ -16,6 +16,34 @@ body[data-route="home"] .tile i .ui-icon{width:15px!important;height:15px!import
 body[data-route="home"] .tile b{font-size:clamp(11px,3vh,13px)!important;line-height:1.05!important;margin-top:auto!important}
 body[data-route="home"] .tile>span:not(.tile-arrow){font-size:clamp(8.5px,2.25vh,10px)!important;line-height:1.15!important;margin-top:2px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 body[data-route="home"] .home-dashboard{display:none!important}
+
+body[data-route="drug"]{overflow:hidden;height:100dvh}
+body[data-route="drug"] .app-sidebar,body[data-route="drug"] .app-topbar,body[data-route="drug"] .app-footer{display:none!important}
+body[data-route="drug"] .app-main{height:100dvh;min-height:0!important;margin-left:0!important;padding:4px 6px!important;overflow:hidden}
+body[data-route="drug"] [data-view="drug"]{height:100%;display:grid!important;grid-template-rows:28px minmax(0,1fr);gap:4px;overflow:hidden;min-height:0}
+body[data-route="drug"] .bar{height:28px;min-height:0;margin:0!important;gap:6px;align-items:center}
+body[data-route="drug"] .bar button{padding:3px 7px!important;font-size:clamp(9px,2.5vh,11px)!important;border-radius:7px}
+body[data-route="drug"] .bar h2{font-size:clamp(13px,3.4vh,16px)!important;line-height:1!important}
+body[data-route="drug"] #drugCard{height:100%;min-height:0;display:grid;grid-template-rows:60px minmax(0,1fr) 42px;gap:4px;overflow:hidden}
+body[data-route="drug"] .drug-head{height:60px;min-height:0;padding:4px 8px!important;gap:8px;border-radius:10px;box-shadow:none}
+body[data-route="drug"] .drug-head>div{min-width:0}
+body[data-route="drug"] .drug-head h1{font-size:clamp(15px,4vh,18px)!important;line-height:1.05!important;margin:0 0 2px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-route="drug"] .drug-head p{font-size:clamp(8px,2.15vh,9.5px)!important;line-height:1.1!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0!important}
+body[data-route="drug"] .badge{font-size:8px!important;padding:2px 5px!important}
+body[data-route="drug"] .spec{margin-top:3px!important;padding:3px 6px!important;border-radius:6px!important;font-size:clamp(9px,2.35vh,10.5px)!important;line-height:1!important}
+body[data-route="drug"] .drug-head img{width:58px;height:52px;object-fit:contain;flex:0 0 auto}
+body[data-route="drug"] .card-grid{height:100%;min-height:0;margin:0!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:minmax(0,1fr);gap:4px!important}
+body[data-route="drug"] .info{min-height:0;overflow:hidden;padding:5px 6px!important;border-radius:9px!important;box-shadow:none}
+body[data-route="drug"] .info h3{font-size:clamp(9.5px,2.55vh,11px)!important;line-height:1!important;margin:0 0 3px!important}
+body[data-route="drug"] .info ul{margin:0!important;padding-left:13px!important}
+body[data-route="drug"] .info ul+ul{margin-top:2px!important}
+body[data-route="drug"] .info li{font-size:clamp(8px,2.2vh,10px)!important;line-height:1.15!important;margin:0 0 2px!important;letter-spacing:-.015em}
+body[data-route="drug"] .critical{font-weight:850}
+body[data-route="drug"] .source{height:42px;min-height:0;margin:0!important;padding:4px 7px!important;border-radius:9px!important;box-shadow:none;display:grid!important;grid-template-rows:1fr 1fr;gap:1px!important;overflow:hidden;font-size:clamp(7px,1.85vh,8.5px)!important;line-height:1.05!important}
+body[data-route="drug"] .source>div:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-route="drug"] .review-meta{display:flex!important;gap:8px!important;flex-wrap:nowrap!important;white-space:nowrap;overflow:hidden;font-size:inherit!important;line-height:1.05!important}
+body[data-route="drug"] .source>span{display:none!important}
+body[data-route="drug"] .qa{display:none!important}
 }
 @media(orientation:landscape) and (max-height:420px){.hero{min-height:96px!important;padding:8px 12px!important}.hero p{-webkit-line-clamp:1}.tile.primary-tile{min-height:74px!important}.tile.secondary-tile{min-height:62px!important}.tile i{width:25px!important;height:25px!important;margin-bottom:3px!important}.app-main{padding-top:54px!important}.app-topbar{height:46px}.side-nav-item{min-height:35px}.scan-layout,.camera,.camera video{height:calc(100dvh - 90px)!important}
 body[data-route="home"] .app-main{padding:46px 7px 5px!important}
@@ -28,4 +56,14 @@ body[data-route="home"] .tile>span:not(.tile-arrow){display:none!important}
 body[data-route="home"] .tile{padding:5px 7px!important}
 body[data-route="home"] .tile i{width:23px!important;height:23px!important;margin-bottom:2px!important}
 body[data-route="home"] .tile b{font-size:clamp(10px,3vh,12px)!important}
+body[data-route="drug"] [data-view="drug"]{grid-template-rows:24px minmax(0,1fr);gap:3px}
+body[data-route="drug"] .bar{height:24px}
+body[data-route="drug"] #drugCard{grid-template-rows:52px minmax(0,1fr) 36px;gap:3px}
+body[data-route="drug"] .drug-head{height:52px;padding:3px 6px!important}
+body[data-route="drug"] .drug-head h1{font-size:clamp(13px,3.8vh,16px)!important}
+body[data-route="drug"] .drug-head img{width:50px;height:44px}
+body[data-route="drug"] .info{padding:4px 5px!important}
+body[data-route="drug"] .info h3{margin-bottom:2px!important}
+body[data-route="drug"] .info li{font-size:clamp(7.5px,2.1vh,9px)!important;line-height:1.1!important;margin-bottom:1px!important}
+body[data-route="drug"] .source{height:36px;padding:3px 6px!important}
 }
