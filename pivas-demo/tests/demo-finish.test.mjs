@@ -8,7 +8,7 @@ d=ks.updateDraft(d.id,{prep:['复溶后稀释']});assert.deepEqual(findMissingFi
 d=ks.resolveConflicts(d.id,{reviewer:'药师甲',note:'核对实物与说明书'});assert.equal(d.evidence.conflicts.length,0);assert.equal(d.evidence.conflictResolutions.length,1);
 d=ks.review(d.id,{approved:true,reviewer:'药师甲'});const p1=ks.publish(d.id);assert.equal(p1.version,1);const p2=ks.rollback(p1.publicationId,{reviewer:'药师乙'});assert.equal(p2.version,2);assert.equal(p2.rolledBackFrom,1);const bundle=ks.exportBundle();assert.equal(bundle.schema,'pivas-demo-knowledge-v1');const ks2=new KnowledgeService({getItem:()=>null,setItem(){}});assert.throws(()=>ks2.importBundle({schema:'bad'}),/不支持/);
 const views=fs.readFileSync(new URL('../js/ui/views.js',import.meta.url),'utf8');const builder=fs.readFileSync(new URL('../js/ui/ai-builder.js',import.meta.url),'utf8');const card=fs.readFileSync(new URL('../js/drugs/drug-card.js',import.meta.url),'utf8');
-for(const s of['自动启动','onBarcode','测试连接','apiTimeout','apiVision','导出知识库','导入知识库','版本历史','回滚'])assert.match(views,new RegExp(s));
+for(const s of['自动启动','onBarcode','测试连接','apiTimeout','apiVision','导出知识库','导入知识库','版本历史','版本差异','回滚'])assert.match(views,new RegExp(s));
 for(const s of['应用修改','缺失字段','字段证据','resolveConflicts','s.log'])assert.match(builder,new RegExp(s));
 for(const s of['审核药师','审核时间','发布时间'])assert.match(card,new RegExp(s));
 console.log('demo finish tests passed');
