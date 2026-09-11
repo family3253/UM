@@ -7,5 +7,6 @@ assert.match(css,/body\[data-route="drug"\] \.drug-head h1\{font-size:var\(--dru
 assert.match(css,/body\[data-route="drug"\] \.info li\{font-size:var\(--drug-body-fs\)!important/);
 assert.match(css,/body\[data-route="drug"\] \.source\{[^}]*font-size:var\(--drug-meta-fs\)!important/);
 assert.match(css,/body\[data-route="drug"\] \.card-grid\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
-assert.doesNotMatch(css,/body\[data-route="drug"\] \.app-sidebar,body\[data-route="drug"\] \.app-topbar,body\[data-route="drug"\] \.app-footer\{display:none!important\}/);
+assert.match(css,/body\[data-route="drug"\] \.app-sidebar\{display:flex!important/);
+assert.match(css,/body\[data-route="drug"\] \.app-topbar\{display:grid!important/);
 console.log('drug card fluid landscape typography tests passed');
