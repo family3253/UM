@@ -1,0 +1,11 @@
+import assert from'node:assert/strict';import fs from'node:fs';
+const css=fs.readFileSync(new URL('../v31-overrides.css',import.meta.url),'utf8');
+assert.match(css,/body\[data-route="drug"\]\{overflow:hidden;height:100dvh\}/);
+assert.match(css,/body\[data-route="drug"\] \.app-main\{height:100dvh/);
+assert.match(css,/body\[data-route="drug"\] \[data-view="drug"\]\{height:100%;display:grid!important/);
+assert.match(css,/body\[data-route="drug"\] #drugCard\{display:grid;grid-template-rows:/);
+assert.match(css,/body\[data-route="drug"\] \.card-grid\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+assert.match(css,/body\[data-route="drug"\] \.qa\{display:none!important\}/);
+assert.match(css,/body\[data-route="drug"\] \.drug-head img\{width:58px;height:52px/);
+assert.match(css,/body\[data-route="drug"\] \.info li\{font-size:clamp\(8px,2\.2vh,10px\)/);
+console.log('drug card landscape one-screen tests passed');
