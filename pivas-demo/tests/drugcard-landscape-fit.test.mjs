@@ -1,5 +1,5 @@
 import assert from'node:assert/strict';import fs from'node:fs';
-const css=fs.readFileSync(new URL('../v31-overrides.css',import.meta.url),'utf8');
+const url=new URL('../drugcard-fluid.css',import.meta.url),css=fs.existsSync(url)?fs.readFileSync(url,'utf8'):'';
 assert.match(css,/body\[data-route="drug"\]\{[^}]*--drug-title-fs:clamp\(/);
 assert.match(css,/body\[data-route="drug"\]\{[^}]*--drug-body-fs:clamp\(/);
 assert.match(css,/body\[data-route="drug"\]\{[^}]*--drug-meta-fs:clamp\(/);
