@@ -1,0 +1,1 @@
+const target=typeof EventTarget!=='undefined'?new EventTarget():null;export const Events={on(name,handler){target?.addEventListener(name,e=>handler(e.detail))},emit(name,detail){target?.dispatchEvent(new CustomEvent(name,{detail}))}};

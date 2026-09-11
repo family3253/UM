@@ -1,0 +1,1 @@
+export class Router{constructor(root){this.root=root;this.current='home'}go(id){this.current=id;this.root?.querySelectorAll('[data-view]').forEach(el=>el.hidden=el.dataset.view!==id);if(typeof window!=='undefined')window.scrollTo?.(0,0)}}

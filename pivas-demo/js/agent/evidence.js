@@ -1,0 +1,1 @@
+export const Evidence={validateDraft(draft={}){const blockers=[],ev=draft.evidence||{};if(!Array.isArray(ev.primary)||!ev.primary.length)blockers.push('missing-primary-evidence');if(Array.isArray(ev.conflicts)&&ev.conflicts.length)blockers.push('conflict:'+ev.conflicts.join(','));return{canPublish:blockers.length===0,blockers}}};
