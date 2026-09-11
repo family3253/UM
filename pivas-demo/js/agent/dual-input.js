@@ -1,4 +1,5 @@
 const norm=s=>String(s||'').toLowerCase().replace(/[\s，。,:：;；()（）/\\\-®]/g,'').replace(/毫升/g,'ml').replace(/毫克/g,'mg');
+const compatible=(a,b)=>{a=norm(a);b=norm(b);if(!a||!b)return true;if(a===b)return true;const short=a.length<=b.length?a:b,long=a.length>b.length?a:b;return short.length>=3&&long.includes(short)};
 export function validateBuilderInputs({materials=[],photos=[]}={}){const missing=[];if(!materials.length)missing.push('materials');if(!photos.length)missing.push('photos');return{ok:missing.length===0,missing}}
 export function mergeCardEvidence(base={},photoEvidence=[]){return{primary:Array.isArray(base.primary)?base.primary:[],supplemental:Array.isArray(base.supplemental)?base.supplemental:[],drugPhotos:Array.isArray(photoEvidence)?photoEvidence:[],conflicts:Array.isArray(base.conflicts)?base.conflicts:[]}}
-export function detectIdentityConflicts(a={},b={}){const fields=['name','brand','en','strength','dosageForm','maker'],out=[];for(const f of fields){if(a[f]&&b[f]&&norm(a[f])!==norm(b[f]))out.push(f)}return out}
+export function detectIdentityConflicts(a={},b={}){const fields=['name','brand','en','strength','dosageForm','maker'],out=[];for(const f of fields){if(a[f]&&b[f]&&!compatible(a[f],b[f]))out.push(f)}return out}
