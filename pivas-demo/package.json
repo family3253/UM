@@ -1,1 +1,1 @@
-{"type":"module","private":true,"scripts":{"test":"node tests/resolver.test.mjs && node tests/knowledge.test.mjs && node tests/agent.test.mjs && node tests/static.test.mjs"}}
+{"type":"module","private":true,"scripts":{"test":"node tests/resolver.test.mjs && node tests/knowledge.test.mjs && node tests/agent.test.mjs && node tests/static.test.mjs && node tests/dual-input.test.mjs && node tests/evidence-photo.test.mjs && node tests/dual-builder-static.test.mjs"}}
