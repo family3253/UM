@@ -1,7 +1,11 @@
 import assert from'node:assert/strict';import fs from'node:fs';
-const views=fs.readFileSync(new URL('../js/ui/views.js',import.meta.url),'utf8');
-const css=fs.readFileSync(new URL('../drugcard-fluid.css',import.meta.url),'utf8');
-for(const s of ['qaFab','qaDrawer','qaVoice','VoiceSearch.start','语音提问'])assert.match(views,new RegExp(s));
+const app=fs.readFileSync(new URL('../js/app.js',import.meta.url),'utf8');
+const voice=fs.readFileSync(new URL('../js/voice/voice-search.js',import.meta.url),'utf8');
+const css=fs.readFileSync(new URL('../drug-qa-fab.css',import.meta.url),'utf8');
+const fab=fs.readFileSync(new URL('../js/ui/drug-qa-fab.js',import.meta.url),'utf8');
+assert.match(app,/mountDrugQAFab/);
+assert.match(voice,/transcribe\(/);
+for(const s of ['qaFab','qaDrawer','qaVoice','语音提问','s.qa.ask'])assert.match(fab,new RegExp(s));
 assert.match(css,/\.drug-qa-fab\{/);
 assert.match(css,/position:fixed/);
 assert.match(css,/right:/);
