@@ -1,0 +1,10 @@
+import assert from'node:assert/strict';import fs from'node:fs';
+const shell=fs.readFileSync(new URL('../js/ui/v31-shell.js',import.meta.url),'utf8');
+const qa=fs.readFileSync(new URL('../js/ui/drug-qa-fab.js',import.meta.url),'utf8');
+const drugs=fs.readFileSync(new URL('../data/drugs.js',import.meta.url),'utf8');
+assert.ok(!shell.includes('BRENTUX_50.svg'),'home hero must not use a specific drug image');
+assert.match(shell,/hero-workflow/,'home hero should use neutral workflow visual');
+assert.match(qa,/host\.hidden/,'QA host must be route-gated');
+assert.match(qa,/dataset\.route!==['"]drug['"]/,'QA host must hide outside drug route');
+assert.match(drugs,/BRENTUX_50_PLACEHOLDER\.svg/,'Brentuximab base image must use cache-safe placeholder');
+console.log('home hero and QA visibility tests passed');
