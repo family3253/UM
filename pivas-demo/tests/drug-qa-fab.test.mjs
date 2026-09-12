@@ -1,0 +1,10 @@
+import assert from'node:assert/strict';import fs from'node:fs';
+const views=fs.readFileSync(new URL('../js/ui/views.js',import.meta.url),'utf8');
+const css=fs.readFileSync(new URL('../drugcard-fluid.css',import.meta.url),'utf8');
+for(const s of ['qaFab','qaDrawer','qaVoice','VoiceSearch.start','语音提问'])assert.match(views,new RegExp(s));
+assert.match(css,/\.drug-qa-fab\{/);
+assert.match(css,/position:fixed/);
+assert.match(css,/right:/);
+assert.match(css,/bottom:/);
+assert.match(css,/\.drug-qa-drawer/);
+console.log('drug QA floating voice tests passed');
