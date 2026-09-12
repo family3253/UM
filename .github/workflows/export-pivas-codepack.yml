@@ -1,0 +1,27 @@
+name: Export PIVAS Codex Codepack
+on:
+  push:
+    branches: [pivas-export-package]
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build code package
+        run: |
+          mkdir -p out
+          cp -a pivas-demo out/pivas-demo
+          if [ -d docs/superpowers ]; then cp -a docs/superpowers out/superpowers-notes; fi
+          cat > out/BASELINE.txt <<'EOF'
+          PIVAS Smart Medication Assistant
+          Source branch: pivas-https-demo
+          Frozen Web Demo baseline commit: 7f76e3240fc3f8647b93c468c28637901688a749
+          Web Demo version: 3.1.7
+          Exported for Android App migration / Codex handoff.
+          EOF
+          (cd out && zip -r ../PIVAS_Codex_CodePack_Web3.1.7.zip .)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PIVAS_Codex_CodePack_Web3.1.7
+          path: PIVAS_Codex_CodePack_Web3.1.7.zip
+          if-no-files-found: error
